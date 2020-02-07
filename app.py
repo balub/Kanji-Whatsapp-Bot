@@ -27,10 +27,13 @@ def bot():
             toSend_meaning.append(dat['word'])
         msg.body(
             'Kanji for ' + fdate + '\n\n' + toSend_kanji[0] + '\n' + toSend_kanji[1] + '\n' + toSend_kanji[2] + '\n' +
-            toSend_kanji[3] + '\n' + toSend_kanji[4]+ '\n\n\n')
-        img = Mics.KanjiTestAnswerImageUrl(fdate,toSend_meaning,toSend_hiragana)
+            toSend_kanji[3] + '\n' + toSend_kanji[4] + '\n\n\n')
+        img = Mics.KanjiTestAnswerImageUrl(fdate, toSend_meaning, toSend_hiragana)
         msg.media(img)
         responded = True
     if not responded:
         msg.body('Im sorry I did not understand your last reply')
     return str(resp)
+
+if __name__ == '__main__':
+    app.run()
