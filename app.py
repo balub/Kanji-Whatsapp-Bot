@@ -29,7 +29,7 @@ def bot():
         img = Mics.KanjiTestAnswerImageUrl(fdate, toSend_meaning, toSend_hiragana)
         msg.media(img)
         responded = True
-    if 'test:' in incoming_msg:
+    if 'quiz:' in incoming_msg:
         data,num = kanji.getXKanji(incoming_msg)
         toSend_kanji = []
         for dat in data:
@@ -37,7 +37,7 @@ def bot():
         msg.body('Test Your Kanji' + '\n\n')
         print(toSend_kanji)
         print(len(toSend_kanji))
-        for n in range(len(data)+1):
+        for n in range(len(toSend_kanji)):
             msg.body(toSend_kanji[n] + '\n')
         responded = True
     if not responded:
