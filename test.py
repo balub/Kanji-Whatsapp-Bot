@@ -1,15 +1,9 @@
-from flask import Flask
 from flask_apscheduler import APScheduler
-import Kanji as kanji
-import datetime
-from datetime import date
 from flask import Flask, request
-import requests
 from twilio.twiml.messaging_response import MessagingResponse
 import Kanji as kanji
 import Mics
 from datetime import date
-import time
 
 fdate = date.today().strftime('%d/%m/%Y')
 
@@ -34,7 +28,7 @@ def bot():
     msg.body(
             'Kanji for ' + fdate + '\n\n' + toSend_kanji[0] + '\n' + toSend_kanji[1] + '\n' + toSend_kanji[2] + '\n' +
             toSend_kanji[3] + '\n' + toSend_kanji[4]+ '\n\n\n')
-    img = Mics.KanjiTestAnswerImageUrl(fdate,toSend_meaning,toSend_hiragana)
+    img = Mics.KanjiTestAnswerImageUrl(fdate, toSend_meaning, toSend_hiragana)
     msg.media(img)
     responded = True
     if not responded:

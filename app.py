@@ -1,10 +1,8 @@
 from flask import Flask, request
-import requests
 from twilio.twiml.messaging_response import MessagingResponse
 import Kanji as kanji
 import Mics
 from datetime import date
-import time
 
 fdate = date.today().strftime('%d/%m/%Y')
 app = Flask(__name__)
@@ -34,6 +32,7 @@ def bot():
     if not responded:
         msg.body('Im sorry I did not understand your last reply')
     return str(resp)
+
 
 if __name__ == '__main__':
     app.run()
