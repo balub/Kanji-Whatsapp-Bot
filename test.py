@@ -1,43 +1,14 @@
-from flask_apscheduler import APScheduler
-from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
-import Kanji as kanji
-import Mics
-from datetime import date
+# test_string = "test:20"
+# spl_word = ':'
+# print("The original string : " + str(test_string))
+# print("The split string : " + str(spl_word))
+# res = int(test_string.partition(spl_word)[2])
 
-fdate = date.today().strftime('%d/%m/%Y')
-
-app = Flask(__name__)
+def function(string):
+    return string,10
 
 
+str,num = function("this is a ramdom string")
 
-# function executed by scheduled job
-def bot():
-    incoming_msg = request.values.get('Body', '').lower()
-    resp = MessagingResponse()
-    msg = resp.message()
-    responded = False
-    data = kanji.get5Kanji()
-    toSend_kanji = []
-    toSend_hiragana = []
-    toSend_meaning = []
-    for dat in data:
-        toSend_kanji.append(dat['kanji'])
-        toSend_hiragana.append(dat['hiragana'])
-        toSend_meaning.append(dat['word'])
-    msg.body(
-            'Kanji for ' + fdate + '\n\n' + toSend_kanji[0] + '\n' + toSend_kanji[1] + '\n' + toSend_kanji[2] + '\n' +
-            toSend_kanji[3] + '\n' + toSend_kanji[4]+ '\n\n\n')
-    img = Mics.KanjiTestAnswerImageUrl(fdate, toSend_meaning, toSend_hiragana)
-    msg.media(img)
-    responded = True
-    if not responded:
-        msg.body('Im sorry I did not understand your last reply')
-    return str(resp)
-
-
-if (__name__ == "__main__"):
-    scheduler = APScheduler()
-    scheduler.add_job(func=bot, args=['job run'], trigger='interval', id='job', seconds=5)
-    scheduler.start()
-    app.run(port=8000)
+# print(str)
+print(num)
