@@ -33,6 +33,5 @@ def bot():
         msg.body('Im sorry I did not understand your last reply')
     return str(resp)
 
-
 if __name__ == '__main__':
     app.run()
