@@ -20,7 +20,7 @@ def get5Kanji():
 
 
 def getXKanji(quantity):
-    spl_word = ':'
+    spl_word = ' '
     num = int(quantity.partition(spl_word)[2])
     rando = random.sample(range(2, 332), num)
     data = []
