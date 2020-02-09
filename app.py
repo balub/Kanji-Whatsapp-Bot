@@ -35,8 +35,6 @@ def bot():
         for dat in data:
             toSend_kanji.append(dat['kanji'])
         msg.body('Test Your Kanji' + '\n\n')
-        print(toSend_kanji)
-        print(len(toSend_kanji))
         for n in range(len(toSend_kanji)):
             msg.body(toSend_kanji[n] + '\n')
         responded = True
