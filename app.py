@@ -36,7 +36,7 @@ def bot():
             toSend_kanji.append(dat['kanji'])
         msg.body('Test Your Kanji' + '\n\n')
         for n in range(len(toSend_kanji)):
-            msg.body(toSend_kanji[n] + '\n')
+            msg.body(toSend_kanji[n])
         responded = True
     if not responded:
         msg.body('Im sorry I did not understand your last reply')
