@@ -1,14 +1,19 @@
-# test_string = "test:20"
-# spl_word = ':'
-# print("The original string : " + str(test_string))
-# print("The split string : " + str(spl_word))
-# res = int(test_string.partition(spl_word)[2])
-
-def function(string):
-    return string,10
+data = input("enter data ")
 
 
-str,num = function("this is a ramdom string")
 
-# print(str)
-print(num)
+def process(data):
+    default = 20
+    split_sentence = data.split()
+    level = split_sentence[0]
+    num_questions = len(split_sentence)
+    if num_questions is 2:
+        return level, default
+    else:
+        return level, split_sentence[2]
+
+
+level, num_questions = process(data)
+
+print(level)
+print(num_questions)

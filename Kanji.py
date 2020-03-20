@@ -31,3 +31,7 @@ def getXKanji(quantity):
             "word": sheet.cell(rand, 1).value
         })
     return data,num
+
+
+if __name__ == "__main__":
+    get5Kanji()
