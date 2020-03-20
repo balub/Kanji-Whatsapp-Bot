@@ -16,7 +16,7 @@ def process(data):
     if num_questions == 2:
         return level, default
     else:
-        return level, split_sentence[2]
+        return level, split_sentence[2],split_sentence[1]
 
 
 def listToString(s):
@@ -51,6 +51,7 @@ def N4Content(question_num):
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
     return toSend_kanji, answers_hiragana_url, answers_meaning_url
 
+
 def N3Content(question_num):
     data = kanji.getKanji('n3', question_num)
     toSend_kanji = []
@@ -64,7 +65,8 @@ def N3Content(question_num):
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
     return toSend_kanji, answers_hiragana_url, answers_meaning_url
 
-def QuizContent(level,question_num):
+
+def QuizContent(level, question_num):
     data = kanji.getKanji(level, question_num)
     toSend_kanji = []
     toSend_hiragana = []
@@ -82,7 +84,7 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-    first_text, num_questions = process(incoming_msg)
+    first_text, num_questions,level = process(incoming_msg)
 
     if first_text == "n5":
         dataFull, H_url, M_url = N5Content(num_questions)
@@ -115,7 +117,7 @@ def bot():
         msg.body("\n")
         responded = True
     elif first_text == "quiz":
-        dataFull = N3Content(num_questions)
+        dataFull = QuizContent(level, num_questions)
         for data in dataFull:
             msg.body(data)
             msg.body("\n")
