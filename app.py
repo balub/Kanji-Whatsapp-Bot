@@ -50,6 +50,19 @@ def N4Content(question_num):
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
     return toSend_kanji,answers_hiragana_url,answers_meaning_url
 
+def N3Content(question_num):
+    data = kanji.getKanji('n3', question_num)
+    toSend_kanji = []
+    toSend_hiragana = []
+    toSend_meaning = []
+    for dat in data:
+        toSend_kanji.append(dat['kanji'])
+        toSend_hiragana.append(dat['hiragana'])
+        toSend_meaning.append(dat['word'])
+    answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
+    answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
+    return toSend_kanji,answers_hiragana_url,answers_meaning_url
+
 
 @app.route('/bot', methods=['POST'])
 def bot():
@@ -80,7 +93,14 @@ def bot():
         msg.body("\n")
         responded = True
     elif first_text == "n3":
-        msg.body(f"Wanted {num_questions} N3 kanji")
+        dataFull, H_url, M_url = N3Content(num_questions)
+        for data in dataFull:
+            msg.body(data)
+            msg.body("\n")
+        msg.body(f' The Answers in hiragana are {H_url}')
+        msg.body("\n")
+        msg.body(f' The Meaning of the Kanji {M_url}')
+        msg.body("\n")
         responded = True
     elif first_text == "quiz":
         msg.body("Quiz")

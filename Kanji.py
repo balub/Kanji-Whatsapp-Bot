@@ -10,8 +10,8 @@ def getKanji(level, quantity):
         wb = xl.load_workbook('res\\N5_Kanji.xlsx')
     elif level == "n4":
         wb = xl.load_workbook('res\\N4_Kanji_List.xlsx')
-    # elif level == 'n3':
-    #     wb = xl.load_workbook(Files.n3)
+    elif level == 'n3':
+        wb = xl.load_workbook('res\\N3_Kanji.xlsx')
     sheet = wb['Sheet 1']
     rando = random.sample(range(2, sheet.max_row), int(quantity))
     data = []
