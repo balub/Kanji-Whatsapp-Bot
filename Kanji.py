@@ -1,12 +1,17 @@
 import openpyxl as xl
 import json
 import random
-
-wb = xl.load_workbook('res/N4_Kanji_List.xlsx')
-sheet = wb['Sheet 1']
+import enum
 
 
-def get5Kanji():
+class Files(enum.Enum):
+    n5 = 'res/N5_Kanji.xlsx'
+    n4 = 'res/N4_Kanji_List.xlsx'
+
+
+def get5Kanji(level, quantity):
+    wb = xl.load_workbook(Files.n4)
+    sheet = wb['Sheet 1']
     rando = random.sample(range(2, 332), 5)
     data = []
     for rand in rando:
@@ -30,7 +35,7 @@ def getXKanji(quantity):
             "hiragana": sheet.cell(rand, 2).value,
             "word": sheet.cell(rand, 1).value
         })
-    return data,num
+    return data, num
 
 
 if __name__ == "__main__":
