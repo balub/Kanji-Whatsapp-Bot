@@ -35,7 +35,8 @@ def N5Content(question_num):
         toSend_meaning.append(dat['word'])
     answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
-    return toSend_kanji,answers_hiragana_url,answers_meaning_url
+    return toSend_kanji, answers_hiragana_url, answers_meaning_url
+
 
 def N4Content(question_num):
     data = kanji.getKanji('n4', question_num)
@@ -48,7 +49,8 @@ def N4Content(question_num):
         toSend_meaning.append(dat['word'])
     answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
-    return toSend_kanji,answers_hiragana_url,answers_meaning_url
+    return toSend_kanji, answers_hiragana_url, answers_meaning_url
+
 
 def N3Content(question_num):
     data = kanji.getKanji('n3', question_num)
@@ -61,7 +63,7 @@ def N3Content(question_num):
         toSend_meaning.append(dat['word'])
     answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
-    return toSend_kanji,answers_hiragana_url,answers_meaning_url
+    return toSend_kanji, answers_hiragana_url, answers_meaning_url
 
 
 @app.route('/bot', methods=['POST'])
@@ -73,7 +75,7 @@ def bot():
     first_text, num_questions = process(incoming_msg)
 
     if first_text == "n5":
-        dataFull,H_url,M_url = N5Content(num_questions)
+        dataFull, H_url, M_url = N5Content(num_questions)
         for data in dataFull:
             msg.body(data)
             msg.body("\n")
