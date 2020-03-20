@@ -4,8 +4,7 @@ import random
 import enum
 
 
-
-def get5Kanji(level, quantity):
+def getKanji(level, quantity):
     if level == 'n5':
         wb = xl.load_workbook('res\\N5_Kanji.xlsx')
     elif level == 'n4':
@@ -24,8 +23,6 @@ def get5Kanji(level, quantity):
 
     return data
 
-
-print(get5Kanji('n4', 5))
 # def getXKanji(quantity):
 #     spl_word = ' '
 #     num = int(quantity.partition(spl_word)[2])

@@ -18,6 +18,9 @@ def process(data):
     else:
         return level, split_sentence[2]
 
+def N5Content(num_questions):
+    kanji.getKanji("n5",num_questions)
+
 
 @app.route('/bot', methods=['POST'])
 def bot():
@@ -28,13 +31,13 @@ def bot():
     first_text, num_questions = process(incoming_msg)
 
     if first_text == "n5":
-        msg.body("N5")
+        msg.body(f"Wanted {num_questions} N5 kanji")
         responded = True
-    elif first_text =="n4":
-        msg.body("N4")
+    elif first_text == "n4":
+        msg.body(f"Wanted {num_questions} N4 kanji")
         responded = True
-    elif first_text =="n3":
-        msg.body("N4")
+    elif first_text == "n3":
+        msg.body(f"Wanted {num_questions} N3 kanji")
         responded = True
     elif first_text == "quiz":
         msg.body("Quiz")
@@ -42,7 +45,6 @@ def bot():
     elif first_text == "leader":
         msg.body("Leader quiz")
         responded = True
-
 
     if not responded:
         msg.body('Im sorry I did not understand your last reply')
