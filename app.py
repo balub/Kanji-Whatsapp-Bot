@@ -29,20 +29,23 @@ def bot():
 
     if first_text == "n5":
         msg.body("N5")
+        responded = True
     elif first_text =="n4":
         msg.body("N4")
+        responded = True
     elif first_text =="n3":
         msg.body("N4")
+        responded = True
     elif first_text == "quiz":
         msg.body("Quiz")
+        responded = True
     elif first_text == "leader":
         msg.body("Leader quiz")
+        responded = True
 
 
-
-
-    # if not responded:
-    #     msg.body('Im sorry I did not understand your last reply')
+    if not responded:
+        msg.body('Im sorry I did not understand your last reply')
     return str(resp)
 
 
