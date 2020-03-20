@@ -51,7 +51,6 @@ def N4Content(question_num):
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
     return toSend_kanji, answers_hiragana_url, answers_meaning_url
 
-
 def N3Content(question_num):
     data = kanji.getKanji('n3', question_num)
     toSend_kanji = []
@@ -64,6 +63,17 @@ def N3Content(question_num):
     answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
     answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
     return toSend_kanji, answers_hiragana_url, answers_meaning_url
+
+def QuizContent(level,question_num):
+    data = kanji.getKanji(level, question_num)
+    toSend_kanji = []
+    toSend_hiragana = []
+    toSend_meaning = []
+    for dat in data:
+        toSend_kanji.append(dat['kanji'])
+        toSend_hiragana.append(dat['hiragana'])
+        toSend_meaning.append(dat['word'])
+    return toSend_kanji
 
 
 @app.route('/bot', methods=['POST'])
@@ -105,7 +115,10 @@ def bot():
         msg.body("\n")
         responded = True
     elif first_text == "quiz":
-        msg.body("Quiz")
+        dataFull = N3Content(num_questions)
+        for data in dataFull:
+            msg.body(data)
+            msg.body("\n")
         responded = True
     elif first_text == "leader":
         msg.body("Leader quiz")
