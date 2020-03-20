@@ -25,7 +25,18 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-    level, num_questions = process(data)
+    first_text, num_questions = process(incoming_msg)
+
+    if first_text == "n5":
+        msg.body("N5")
+    elif first_text =="n4":
+        msg.body("N4")
+    elif first_text =="n3":
+        msg.body("N4")
+    elif first_text == "quiz":
+        msg.body("Quiz")
+    elif first_text == "leader":
+        msg.body("Leader quiz")
 
 
 
