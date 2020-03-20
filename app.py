@@ -20,12 +20,25 @@ def process(data):
 
 
 def listToString(s):
-    str1 = ","
-    return str1.join(s)
+    str1 = ""
+    return str1.join(str(s))
 
 
 def N5Content(question_num):
     data = kanji.getKanji('n5', question_num)
+    toSend_kanji = []
+    toSend_hiragana = []
+    toSend_meaning = []
+    for dat in data:
+        toSend_kanji.append(dat['kanji'])
+        toSend_hiragana.append(dat['hiragana'])
+        toSend_meaning.append(dat['word'])
+    answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
+    answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
+    return toSend_kanji,answers_hiragana_url,answers_meaning_url
+
+def N4Content(question_num):
+    data = kanji.getKanji('n4', question_num)
     toSend_kanji = []
     toSend_hiragana = []
     toSend_meaning = []
@@ -47,18 +60,24 @@ def bot():
     first_text, num_questions = process(incoming_msg)
 
     if first_text == "n5":
-        msg.body(f"Wanted {num_questions} N5 kanji")
         dataFull,H_url,M_url = N5Content(num_questions)
         for data in dataFull:
             msg.body(data)
             msg.body("\n")
-            msg.body(H_url)
-            msg.body("\n")
-            msg.body(M_url)
-            msg.body("\n")
+        msg.body(f' The Answers in hiragana are {H_url}')
+        msg.body("\n")
+        msg.body(f' The Meaning of the Kanji {M_url}')
+        msg.body("\n")
         responded = True
     elif first_text == "n4":
-        msg.body(f"Wanted {num_questions} N4 kanji")
+        dataFull, H_url, M_url = N4Content(num_questions)
+        for data in dataFull:
+            msg.body(data)
+            msg.body("\n")
+        msg.body(f' The Answers in hiragana are {H_url}')
+        msg.body("\n")
+        msg.body(f' The Meaning of the Kanji {M_url}')
+        msg.body("\n")
         responded = True
     elif first_text == "n3":
         msg.body(f"Wanted {num_questions} N3 kanji")
