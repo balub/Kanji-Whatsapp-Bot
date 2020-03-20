@@ -13,13 +13,27 @@ def process(data):
     split_sentence = data.split()
     level = split_sentence[0]
     num_questions = len(split_sentence)
-    if num_questions is 2:
+    if num_questions == 2:
         return level, default
     else:
         return level, split_sentence[2]
 
-def N5Content(num_questions):
-    kanji.getKanji("n5",num_questions)
+
+def N5Content(question_num):
+    data = kanji.getKanji('n5', question_num)
+    toSend_kanji = []
+    toSend_hiragana = []
+    toSend_meaning = []
+    for dat in data:
+        toSend_kanji.append(dat['kanji'])
+        toSend_hiragana.append(dat['hiragana'])
+        toSend_meaning.append(dat['word'])
+
+    return toSend_kanji
+
+
+
+
 
 
 @app.route('/bot', methods=['POST'])
@@ -32,6 +46,9 @@ def bot():
 
     if first_text == "n5":
         msg.body(f"Wanted {num_questions} N5 kanji")
+        dataFull = N5Content(num_questions)
+        for data in dataFull:
+            msg.body(data+"\n")
         responded = True
     elif first_text == "n4":
         msg.body(f"Wanted {num_questions} N4 kanji")

@@ -5,14 +5,16 @@ import enum
 
 
 def getKanji(level, quantity):
-    if level == 'n5':
+    global wb
+    if level == "n5":
         wb = xl.load_workbook('res\\N5_Kanji.xlsx')
-    elif level == 'n4':
+    elif level == "n4":
         wb = xl.load_workbook('res\\N4_Kanji_List.xlsx')
     # elif level == 'n3':
     #     wb = xl.load_workbook(Files.n3)
     sheet = wb['Sheet 1']
-    rando = random.sample(range(2, sheet.max_row), 5)
+    print(sheet.max_row)
+    rando = random.sample(range(2, sheet.max_row), int(quantity))
     data = []
     for rand in rando:
         data.append({
@@ -20,6 +22,7 @@ def getKanji(level, quantity):
             "hiragana": sheet.cell(rand, 2).value,
             "word": sheet.cell(rand, 1).value
         })
+
 
     return data
 
