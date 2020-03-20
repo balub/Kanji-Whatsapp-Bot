@@ -13,7 +13,6 @@ def getKanji(level, quantity):
     # elif level == 'n3':
     #     wb = xl.load_workbook(Files.n3)
     sheet = wb['Sheet 1']
-    print(sheet.max_row)
     rando = random.sample(range(2, sheet.max_row), int(quantity))
     data = []
     for rand in rando:
@@ -22,7 +21,6 @@ def getKanji(level, quantity):
             "hiragana": sheet.cell(rand, 2).value,
             "word": sheet.cell(rand, 1).value
         })
-
 
     return data
 

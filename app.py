@@ -19,6 +19,11 @@ def process(data):
         return level, split_sentence[2]
 
 
+def listToString(s):
+    str1 = ","
+    return str1.join(s)
+
+
 def N5Content(question_num):
     data = kanji.getKanji('n5', question_num)
     toSend_kanji = []
@@ -28,12 +33,9 @@ def N5Content(question_num):
         toSend_kanji.append(dat['kanji'])
         toSend_hiragana.append(dat['hiragana'])
         toSend_meaning.append(dat['word'])
-
-    return toSend_kanji
-
-
-
-
+    answers_hiragana_url = Mics.GenImageUrl(listToString(toSend_hiragana))
+    answers_meaning_url = Mics.GenImageUrl(listToString(toSend_meaning))
+    return toSend_kanji,answers_hiragana_url,answers_meaning_url
 
 
 @app.route('/bot', methods=['POST'])
@@ -46,9 +48,14 @@ def bot():
 
     if first_text == "n5":
         msg.body(f"Wanted {num_questions} N5 kanji")
-        dataFull = N5Content(num_questions)
+        dataFull,H_url,M_url = N5Content(num_questions)
         for data in dataFull:
-            msg.body(data+"\n")
+            msg.body(data)
+            msg.body("\n")
+            msg.body(H_url)
+            msg.body("\n")
+            msg.body(M_url)
+            msg.body("\n")
         responded = True
     elif first_text == "n4":
         msg.body(f"Wanted {num_questions} N4 kanji")
