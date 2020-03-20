@@ -2,7 +2,7 @@ import openpyxl as xl
 import json
 import random
 
-wb = xl.load_workbook('N4_Kanji_List.xlsx')
+wb = xl.load_workbook('res/N4_Kanji_List.xlsx')
 sheet = wb['Sheet 1']
 
 
